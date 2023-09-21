@@ -52,6 +52,8 @@ class Stage extends Container {
    */
   constructor(opts) {
     super();
+    console.log("email: " + this.getCookie("email"))
+    this.email = this.getCookie("email")
     this.locked = false;
     this.spritesheet = opts.spritesheet;
     this.interactive = true;
@@ -68,6 +70,12 @@ class Stage extends Container {
 
     this._setStage();
     this.scaleToWindow();
+  }
+
+  getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
   }
 
   static scoreBoxLocation() {
@@ -222,6 +230,7 @@ class Stage extends Container {
    * @returns {Number} - The number of ducks hit with the shot
    */
   shotsFired(clickPoint, radius) {
+    console.log("shotsFired: " + this.email)
     // flash the screen
     this.flashScreen.visible = true;
     _delay(() => {
@@ -241,6 +250,7 @@ class Stage extends Container {
         });
       }
     }
+    console.log("ducks Shot: " + ducksShot + " : " + this.email)
     return ducksShot;
   }
 

@@ -1,22 +1,28 @@
-<!DOCTYPE HTML>
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>DuckHuntJS</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="description" content="An open source, web based, responsive implementation of Duck Hunt in canvas or webgl depending on your client.">
-  <meta name="author" content="Matt Surabian">
-  <style>
-    body {
-      overflow:hidden;
-      margin: 0;
-      padding: 0;
-      background-color: #000000;
-    }
-  </style>
-  <script src="duckhunt.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var storeValues = function(form) {
+            var today = new Date();
+            var expiry = new Date(today.getTime() + 30 * 24 * 3600 * 1000); // plus 30 days
+            console.log(form.email.value)
+            document.cookie="email" + "=" + escape(form.email.value) + "; path=/; expires=" + expiry.toGMTString();
+            setCookie("email", form.email.value);
+            console.log("Cookie: " + document.cookie)
+            return true;
+        };
+
+    </script>
 </head>
 <body>
+<a href="duckhunt.html">Start</a>
+<form name="myForm" method="get" action="duckhunt.html" onsubmit="return storeValues(this);">
+    <fieldset>
+        <label>email</label><span><input type="text" size="32" name="email" value=""></span>
+        <span><input type="submit" value="Start Game"></span>
+    </fieldset>
+</form>
 </body>
 </html>

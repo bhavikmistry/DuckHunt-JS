@@ -32,7 +32,7 @@ class Game {
     this.levelIndex = 0;
     this.maxScore = 0;
     this.timePaused = 0;
-    this.muted = false;
+    this.muted = true;
     this.paused = false;
     this.activeSounds = [];
 
@@ -284,7 +284,8 @@ class Game {
         y: 1
       }
     });
-    this.stage.hud.muteLink = 'mute (m)';
+    console.log("Muted: " + this.muted)
+    this.stage.hud.muteLink = this.muted ? 'mute (m)' : 'unmute (m)';
   }
 
   addPauseLink() {
