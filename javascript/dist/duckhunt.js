@@ -37256,7 +37256,6 @@ var Game = function () {
   function Game(opts) {
     _classCallCheck(this, Game);
 
-    console.log("email: " + document.cookie);
     this.spritesheet = opts.spritesheet;
     this.loader = _pixi.loader;
     this.renderer = (0, _pixi.autoDetectRenderer)(window.innerWidth, window.innerHeight, {
@@ -38701,6 +38700,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _pixi = __webpack_require__(99);
@@ -38738,6 +38739,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//import Kafka from 'node-rdkafka'
 
 var MAX_X = 800;
 var MAX_Y = 600;
@@ -38787,6 +38790,8 @@ var Stage = function (_Container) {
 
     var _this = _possibleConstructorReturn(this, (Stage.__proto__ || Object.getPrototypeOf(Stage)).call(this));
 
+    console.log("email: " + _this.getCookie("email"));
+    _this.email = _this.getCookie("email");
     _this.locked = false;
     _this.spritesheet = opts.spritesheet;
     _this.interactive = true;
@@ -38807,6 +38812,13 @@ var Stage = function (_Container) {
   }
 
   _createClass(Stage, [{
+    key: 'getCookie',
+    value: function getCookie(name) {
+      var value = '; ' + document.cookie;
+      var parts = value.split('; ' + name + '=');
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+  }, {
     key: 'pause',
     value: function pause() {
       this.dog.timeline.pause();
@@ -38934,7 +38946,12 @@ var Stage = function (_Container) {
     value: function shotsFired(clickPoint, radius) {
       var _this3 = this;
 
-      console.log("shotsFired");
+      console.log("shotsFired: " + this.email);
+      var event = {};
+      event.email = this.email;
+      event.eventType = "SHOT";
+      event.eventSize = 1;
+      this.postKafkaMessage(event);
       // flash the screen
       this.flashScreen.visible = true;
       (0, _function.delay)(function () {
@@ -38954,7 +38971,10 @@ var Stage = function (_Container) {
           });
         }
       }
-      console.log("ducks Shot: " + ducksShot);
+      console.log("ducks Shot: " + ducksShot + " : " + this.email);
+      event.eventType = "HIT";
+      event.eventSize = ducksShot;
+      this.postKafkaMessage(event);
       return ducksShot;
     }
   }, {
@@ -39134,6 +39154,36 @@ var Stage = function (_Container) {
     key: 'isLocked',
     value: function isLocked() {
       return this.locked;
+    }
+  }, {
+    key: 'getConfig',
+    value: function getConfig() {
+      var data = 'bootstrap.servers=pkc-q283m.af-south-1.aws.confluent.cloud:9092\nsecurity.protocol=SASL_SSL\nsasl.mechanisms=PLAIN\nsasl.username=LLQSHPFJ6MEFR2KI\nsasl.password=23EFuA6WhxWuxrzMQoSJ9FreGUJ6reW+71yi8XMRAM2Rip39NkYS1/FMeWnGl1U+\nsession.timeout.ms=45000'.split("\n");
+      return data.reduce(function (config, line) {
+        var _line$split = line.split("="),
+            _line$split2 = _slicedToArray(_line$split, 2),
+            key = _line$split2[0],
+            value = _line$split2[1];
+
+        if (key && value) {
+          config[key] = value;
+        }
+        return config;
+      }, {});
+    }
+  }, {
+    key: 'postKafkaMessage',
+    value: function postKafkaMessage(event) {
+      console.log(event);
+      fetch('/rest/postEvent', {
+        method: 'POST',
+        body: JSON.stringify(event), // string or object
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (response) {
+        return console.log(response);
+      });
     }
   }], [{
     key: 'scoreBoxLocation',

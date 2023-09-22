@@ -9,7 +9,8 @@
     "build": "webpack",
     "audio": "gulp audio",
     "images": "gulp images",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "cp -r ./dist/* ../kafkarest/src/main/resources/static"
   },
   "repository": {
     "type": "git",

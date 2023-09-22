@@ -11,7 +11,8 @@
             document.cookie="email" + "=" + escape(form.email.value) + "; path=/; expires=" + expiry.toGMTString();
             setCookie("email", form.email.value);
             console.log("Cookie: " + document.cookie)
-            return true;
+            window.open("duckhunt.html", "_self")
+            return false;
         };
 
     </script>

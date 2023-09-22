@@ -7,6 +7,7 @@ import Utils from '../libs/utils';
 import Duck from './Duck';
 import Dog from './Dog';
 import Hud from './Hud';
+//import Kafka from 'node-rdkafka'
 
 const MAX_X = 800;
 const MAX_Y = 600;
@@ -231,6 +232,11 @@ class Stage extends Container {
    */
   shotsFired(clickPoint, radius) {
     console.log("shotsFired: " + this.email)
+    let event = {}
+    event.email = this.email
+    event.eventType = "SHOT"
+    event.eventSize = 1
+    this.postKafkaMessage(event)
     // flash the screen
     this.flashScreen.visible = true;
     _delay(() => {
@@ -251,6 +257,9 @@ class Stage extends Container {
       }
     }
     console.log("ducks Shot: " + ducksShot + " : " + this.email)
+    event.eventType = "HIT"
+    event.eventSize = ducksShot
+    this.postKafkaMessage(event)
     return ducksShot;
   }
 
@@ -395,6 +404,34 @@ class Stage extends Container {
    */
   isLocked() {
     return this.locked;
+  }
+
+  getConfig() {
+    let data =
+`bootstrap.servers=pkc-q283m.af-south-1.aws.confluent.cloud:9092
+security.protocol=SASL_SSL
+sasl.mechanisms=PLAIN
+sasl.username=LLQSHPFJ6MEFR2KI
+sasl.password=23EFuA6WhxWuxrzMQoSJ9FreGUJ6reW+71yi8XMRAM2Rip39NkYS1/FMeWnGl1U+
+session.timeout.ms=45000`.split("\n");
+    return data.reduce((config, line) => {
+      const [key, value] = line.split("=");
+      if (key && value) {
+        config[key] = value;
+      }
+      return config;
+    }, {})
+  }
+
+  postKafkaMessage(event) {
+    console.log(event)
+    fetch('/rest/postEvent', {
+      method: 'POST',
+      body: JSON.stringify(event), // string or object
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => console.log(response));
   }
 }
 
