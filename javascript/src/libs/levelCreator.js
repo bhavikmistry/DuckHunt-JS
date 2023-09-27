@@ -19,5 +19,11 @@ module.exports.parseLevelQueryString = function() {
 };
 
 module.exports.urlContainsLevelData = function() {
-  return window.location.href.indexOf('?') !== -1;
+  return window.location.href.indexOf('?') !== -1 &&
+  window.location.href.indexOf('ducwavesks') !== -1 &&
+  window.location.href.indexOf('ducks') !== -1 &&
+  window.location.href.indexOf('points') !== -1 &&
+  window.location.href.indexOf('bullets') !== -1 &&
+  window.location.href.indexOf('radius') !== -1 &&
+  window.location.href.indexOf('speed') !== -1;
 };

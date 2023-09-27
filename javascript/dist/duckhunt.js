@@ -37802,6 +37802,11 @@ var Game = function () {
         }
 
         this.stage.hud.score = val;
+        var event = {};
+        event.email = this.stage.email;
+        event.eventType = "SCORE";
+        event.eventSize = val;
+        this.stage.postKafkaMessage(event);
       }
     }
 
@@ -37944,7 +37949,7 @@ module.exports.parseLevelQueryString = function () {
 };
 
 module.exports.urlContainsLevelData = function () {
-  return window.location.href.indexOf('?') !== -1;
+  return window.location.href.indexOf('?') !== -1 && window.location.href.indexOf('ducwavesks') !== -1 && window.location.href.indexOf('ducks') !== -1 && window.location.href.indexOf('points') !== -1 && window.location.href.indexOf('bullets') !== -1 && window.location.href.indexOf('radius') !== -1 && window.location.href.indexOf('speed') !== -1;
 };
 
 /***/ }),
@@ -38700,8 +38705,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _pixi = __webpack_require__(99);
@@ -39154,22 +39157,6 @@ var Stage = function (_Container) {
     key: 'isLocked',
     value: function isLocked() {
       return this.locked;
-    }
-  }, {
-    key: 'getConfig',
-    value: function getConfig() {
-      var data = 'bootstrap.servers=pkc-q283m.af-south-1.aws.confluent.cloud:9092\nsecurity.protocol=SASL_SSL\nsasl.mechanisms=PLAIN\nsasl.username=LLQSHPFJ6MEFR2KI\nsasl.password=23EFuA6WhxWuxrzMQoSJ9FreGUJ6reW+71yi8XMRAM2Rip39NkYS1/FMeWnGl1U+\nsession.timeout.ms=45000'.split("\n");
-      return data.reduce(function (config, line) {
-        var _line$split = line.split("="),
-            _line$split2 = _slicedToArray(_line$split, 2),
-            key = _line$split2[0],
-            value = _line$split2[1];
-
-        if (key && value) {
-          config[key] = value;
-        }
-        return config;
-      }, {});
     }
   }, {
     key: 'postKafkaMessage',

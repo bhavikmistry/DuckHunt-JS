@@ -406,23 +406,6 @@ class Stage extends Container {
     return this.locked;
   }
 
-  getConfig() {
-    let data =
-`bootstrap.servers=pkc-q283m.af-south-1.aws.confluent.cloud:9092
-security.protocol=SASL_SSL
-sasl.mechanisms=PLAIN
-sasl.username=LLQSHPFJ6MEFR2KI
-sasl.password=23EFuA6WhxWuxrzMQoSJ9FreGUJ6reW+71yi8XMRAM2Rip39NkYS1/FMeWnGl1U+
-session.timeout.ms=45000`.split("\n");
-    return data.reduce((config, line) => {
-      const [key, value] = line.split("=");
-      if (key && value) {
-        config[key] = value;
-      }
-      return config;
-    }, {})
-  }
-
   postKafkaMessage(event) {
     console.log(event)
     fetch('/rest/postEvent', {

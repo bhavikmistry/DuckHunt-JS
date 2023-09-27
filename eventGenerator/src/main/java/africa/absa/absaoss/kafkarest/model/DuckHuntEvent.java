@@ -5,11 +5,12 @@
  */
 package africa.absa.absaoss.kafkarest.model;
 
-import org.apache.avro.message.BinaryMessageDecoder;
-import org.apache.avro.message.BinaryMessageEncoder;
-import org.apache.avro.message.SchemaStore;
+import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
 import org.apache.avro.util.Utf8;
+import org.apache.avro.message.BinaryMessageEncoder;
+import org.apache.avro.message.BinaryMessageDecoder;
+import org.apache.avro.message.SchemaStore;
 
 /** Duck Hunt Event Schema. */
 @org.apache.avro.specific.AvroGenerated
@@ -74,9 +75,9 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
   }
 
   /** email address of event */
-  private CharSequence email;
+  private java.lang.CharSequence email;
   /** The type of the event. */
-  private EventType eventType;
+  private africa.absa.absaoss.kafkarest.model.EventType eventType;
   /** The ssize of the event */
   private int eventSize;
 
@@ -93,7 +94,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
    * @param eventType The type of the event.
    * @param eventSize The ssize of the event
    */
-  public DuckHuntEvent(CharSequence email, EventType eventType, Integer eventSize) {
+  public DuckHuntEvent(java.lang.CharSequence email, africa.absa.absaoss.kafkarest.model.EventType eventType, java.lang.Integer eventSize) {
     this.email = email;
     this.eventType = eventType;
     this.eventSize = eventSize;
@@ -107,7 +108,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
 
   // Used by DatumWriter.  Applications should not call.
   @Override
-  public Object get(int field$) {
+  public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return email;
     case 1: return eventType;
@@ -119,11 +120,11 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
   // Used by DatumReader.  Applications should not call.
   @Override
   @SuppressWarnings(value="unchecked")
-  public void put(int field$, Object value$) {
+  public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: email = (CharSequence)value$; break;
-    case 1: eventType = (EventType)value$; break;
-    case 2: eventSize = (Integer)value$; break;
+    case 0: email = (java.lang.CharSequence)value$; break;
+    case 1: eventType = (africa.absa.absaoss.kafkarest.model.EventType)value$; break;
+    case 2: eventSize = (java.lang.Integer)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -132,7 +133,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'email' field.
    * @return email address of event
    */
-  public CharSequence getEmail() {
+  public java.lang.CharSequence getEmail() {
     return email;
   }
 
@@ -142,7 +143,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
    * email address of event
    * @param value the value to set.
    */
-  public void setEmail(CharSequence value) {
+  public void setEmail(java.lang.CharSequence value) {
     this.email = value;
   }
 
@@ -150,7 +151,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
    * Gets the value of the 'eventType' field.
    * @return The type of the event.
    */
-  public EventType getEventType() {
+  public africa.absa.absaoss.kafkarest.model.EventType getEventType() {
     return eventType;
   }
 
@@ -160,7 +161,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
    * The type of the event.
    * @param value the value to set.
    */
-  public void setEventType(EventType value) {
+  public void setEventType(africa.absa.absaoss.kafkarest.model.EventType value) {
     this.eventType = value;
   }
 
@@ -186,8 +187,8 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
    * Creates a new DuckHuntEvent RecordBuilder.
    * @return A new DuckHuntEvent RecordBuilder
    */
-  public static Builder newBuilder() {
-    return new Builder();
+  public static africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder newBuilder() {
+    return new africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder();
   }
 
   /**
@@ -195,11 +196,11 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
    * @param other The existing builder to copy.
    * @return A new DuckHuntEvent RecordBuilder
    */
-  public static Builder newBuilder(Builder other) {
+  public static africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder newBuilder(africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder other) {
     if (other == null) {
-      return new Builder();
+      return new africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder();
     } else {
-      return new Builder(other);
+      return new africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder(other);
     }
   }
 
@@ -208,11 +209,11 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
    * @param other The existing instance to copy.
    * @return A new DuckHuntEvent RecordBuilder
    */
-  public static Builder newBuilder(DuckHuntEvent other) {
+  public static africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder newBuilder(africa.absa.absaoss.kafkarest.model.DuckHuntEvent other) {
     if (other == null) {
-      return new Builder();
+      return new africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder();
     } else {
-      return new Builder(other);
+      return new africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder(other);
     }
   }
 
@@ -224,9 +225,9 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
     implements org.apache.avro.data.RecordBuilder<DuckHuntEvent> {
 
     /** email address of event */
-    private CharSequence email;
+    private java.lang.CharSequence email;
     /** The type of the event. */
-    private EventType eventType;
+    private africa.absa.absaoss.kafkarest.model.EventType eventType;
     /** The ssize of the event */
     private int eventSize;
 
@@ -239,7 +240,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(Builder other) {
+    private Builder(africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.email)) {
         this.email = data().deepCopy(fields()[0].schema(), other.email);
@@ -259,7 +260,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
      * Creates a Builder by copying an existing DuckHuntEvent instance
      * @param other The existing instance to copy.
      */
-    private Builder(DuckHuntEvent other) {
+    private Builder(africa.absa.absaoss.kafkarest.model.DuckHuntEvent other) {
       super(SCHEMA$);
       if (isValidValue(fields()[0], other.email)) {
         this.email = data().deepCopy(fields()[0].schema(), other.email);
@@ -280,7 +281,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
       * email address of event
       * @return The value.
       */
-    public CharSequence getEmail() {
+    public java.lang.CharSequence getEmail() {
       return email;
     }
 
@@ -291,7 +292,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'email'.
       * @return This builder.
       */
-    public Builder setEmail(CharSequence value) {
+    public africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder setEmail(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.email = value;
       fieldSetFlags()[0] = true;
@@ -313,7 +314,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
       * email address of event
       * @return This builder.
       */
-    public Builder clearEmail() {
+    public africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder clearEmail() {
       email = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -324,7 +325,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
       * The type of the event.
       * @return The value.
       */
-    public EventType getEventType() {
+    public africa.absa.absaoss.kafkarest.model.EventType getEventType() {
       return eventType;
     }
 
@@ -335,7 +336,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'eventType'.
       * @return This builder.
       */
-    public Builder setEventType(EventType value) {
+    public africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder setEventType(africa.absa.absaoss.kafkarest.model.EventType value) {
       validate(fields()[1], value);
       this.eventType = value;
       fieldSetFlags()[1] = true;
@@ -357,7 +358,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
       * The type of the event.
       * @return This builder.
       */
-    public Builder clearEventType() {
+    public africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder clearEventType() {
       eventType = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -379,7 +380,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
       * @param value The value of 'eventSize'.
       * @return This builder.
       */
-    public Builder setEventSize(int value) {
+    public africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder setEventSize(int value) {
       validate(fields()[2], value);
       this.eventSize = value;
       fieldSetFlags()[2] = true;
@@ -401,7 +402,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
       * The ssize of the event
       * @return This builder.
       */
-    public Builder clearEventSize() {
+    public africa.absa.absaoss.kafkarest.model.DuckHuntEvent.Builder clearEventSize() {
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -411,13 +412,13 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
     public DuckHuntEvent build() {
       try {
         DuckHuntEvent record = new DuckHuntEvent();
-        record.email = fieldSetFlags()[0] ? this.email : (CharSequence) defaultValue(fields()[0]);
-        record.eventType = fieldSetFlags()[1] ? this.eventType : (EventType) defaultValue(fields()[1]);
-        record.eventSize = fieldSetFlags()[2] ? this.eventSize : (Integer) defaultValue(fields()[2]);
+        record.email = fieldSetFlags()[0] ? this.email : (java.lang.CharSequence) defaultValue(fields()[0]);
+        record.eventType = fieldSetFlags()[1] ? this.eventType : (africa.absa.absaoss.kafkarest.model.EventType) defaultValue(fields()[1]);
+        record.eventSize = fieldSetFlags()[2] ? this.eventSize : (java.lang.Integer) defaultValue(fields()[2]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
-      } catch (Exception e) {
+      } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
       }
     }
@@ -461,7 +462,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
     if (fieldOrder == null) {
       this.email = in.readString(this.email instanceof Utf8 ? (Utf8)this.email : null);
 
-      this.eventType = EventType.values()[in.readEnum()];
+      this.eventType = africa.absa.absaoss.kafkarest.model.EventType.values()[in.readEnum()];
 
       this.eventSize = in.readInt();
 
@@ -473,7 +474,7 @@ public class DuckHuntEvent extends org.apache.avro.specific.SpecificRecordBase i
           break;
 
         case 1:
-          this.eventType = EventType.values()[in.readEnum()];
+          this.eventType = africa.absa.absaoss.kafkarest.model.EventType.values()[in.readEnum()];
           break;
 
         case 2:

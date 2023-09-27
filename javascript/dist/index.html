@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Duck Hunt Confluent Kafka Demo</title>
     <script>
-        var storeValues = function(form) {
+        var storeValues = function (form) {
             var today = new Date();
             var expiry = new Date(today.getTime() + 30 * 24 * 3600 * 1000); // plus 30 days
             console.log(form.email.value)
-            document.cookie="email" + "=" + escape(form.email.value) + "; path=/; expires=" + expiry.toGMTString();
+            document.cookie = "email" + "=" + escape(form.email.value) + "; path=/; expires=" + expiry.toGMTString();
             setCookie("email", form.email.value);
             console.log("Cookie: " + document.cookie)
             window.open("duckhunt.html", "_self")
@@ -18,12 +18,14 @@
     </script>
 </head>
 <body>
-<a href="duckhunt.html">Start</a>
+<h1>Duck Hunt Confluent Kafka Demo</h1>
+
 <form name="myForm" method="get" action="duckhunt.html" onsubmit="return storeValues(this);">
     <fieldset>
         <label>email</label><span><input type="text" size="32" name="email" value=""></span>
         <span><input type="submit" value="Start Game"></span>
     </fieldset>
 </form>
-</body>
+Based of Matthew Surabian's DuckHunt-JS on <a href="https://github.com/MattSurabian/DuckHunt-JS">Github</a>.
+<img src="DuckHuntScreenshot.png" width="860" height="475"/></body>
 </html>

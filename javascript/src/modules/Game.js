@@ -159,6 +159,11 @@ class Game {
       }
 
       this.stage.hud.score = val;
+      let event = {}
+      event.email = this.stage.email
+      event.eventType = "SCORE"
+      event.eventSize = val
+      this.stage.postKafkaMessage(event)
     }
 
   }
