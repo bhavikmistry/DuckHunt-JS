@@ -1,0 +1,43 @@
+{
+  "api": {
+    "duckApi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "pushToKafka"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "pushToKafka": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_pushToKafka_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "pushToKafka"
+        }
+      ]
+    },
+    "AMPLIFY_function_pushToKafka_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "pushToKafka"
+        }
+      ]
+    }
+  }
+}

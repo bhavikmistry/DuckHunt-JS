@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/rest/postEvent": {
+      "name": "/rest/postEvent",
+      "lambdaFunction": "pushToKafka",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
