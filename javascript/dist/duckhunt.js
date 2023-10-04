@@ -1,3 +1,8 @@
+import { Amplify, API } from 'aws-amplify';
+import awsconfig from './aws-exports';
+
+Amplify.configure(awsconfig);
+
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -39162,15 +39167,29 @@ var Stage = function (_Container) {
     key: 'postKafkaMessage',
     value: function postKafkaMessage(event) {
       console.log(event);
-      fetch('/rest/postEvent', {
-        method: 'POST',
-        body: JSON.stringify(event), // string or object
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(function (response) {
-        return console.log(response);
-      });
+      // fetch('/rest/postEvent', {
+      //   method: 'POST',
+      //   body: JSON.stringify(event), // string or object
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   }
+      // }).then(function (response) {
+      //   return console.log(response);
+      // });
+      const apiName = 'duckApi';
+      const path = '/rest/postEvent';
+      const myInit = {
+        headers: {},
+        response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
+      };
+
+      API.get(apiName, path, myInit)
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
     }
   }], [{
     key: 'scoreBoxLocation',
